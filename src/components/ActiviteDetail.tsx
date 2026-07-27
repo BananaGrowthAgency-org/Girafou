@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ACTIVITES, RESERVATION_URL, type Activite } from "@/lib/activites";
 import ReglesParc from "./ReglesParc";
 
-import { TEXT_OUTLINE, TEXT_OUTLINE_SOFT } from "@/lib/text";
+import { TEXT_OUTLINE, TEXT_OUTLINE_SOFT, fixOrphans } from "@/lib/text";
 import { useLocale, useLocalePath } from "@/lib/i18n/useLocale";
 import { ui } from "@/lib/i18n/ui";
 import type { ActiviteTexte, Dictionary } from "@/lib/i18n/dictionaries";
@@ -375,7 +375,7 @@ export default function ActiviteDetail({
                   </div>
                   <div className="flex flex-col gap-4">
                     {texte.description.map((p, i) => (
-                      <p key={i} className="text-[17px] sm:text-lg leading-relaxed text-amber-900/80 font-medium" style={{ fontFamily: NUNITO }}>{p}</p>
+                      <p key={i} className="text-[17px] sm:text-lg leading-relaxed text-amber-900/80 font-medium" style={{ fontFamily: NUNITO }}>{fixOrphans(p)}</p>
                     ))}
                   </div>
                   <div className="flex justify-center">

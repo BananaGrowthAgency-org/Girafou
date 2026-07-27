@@ -44,7 +44,7 @@ export default function PracticalInfo({
   const starsOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   return (
-    <section ref={sectionRef} id="infos" className="relative py-16 sm:py-24 overflow-hidden spots-pattern" style={{ background: "linear-gradient(to bottom, #FFF8E1 0%, #FFE8A0 100%)" }}>
+    <section ref={sectionRef} id="infos" className="relative pt-12 pb-16 sm:py-24 overflow-hidden spots-pattern" style={{ background: "linear-gradient(to bottom, #FFF8E1 0%, #FFE8A0 100%)" }}>
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
 

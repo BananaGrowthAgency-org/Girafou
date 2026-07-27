@@ -78,7 +78,7 @@ export function ConditionsBlock({ t }: { t: Dictionary["anniversaires"] }) {
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5 }}
-        className="relative flex items-center gap-4 rounded-2xl bg-white border border-amber-100 shadow-md p-5 lg:pl-24"
+        className="relative rounded-2xl bg-white border border-amber-100 shadow-md p-5 lg:pl-24"
       >
         {/* Badge « Chaussettes Obligatoires » flottant — coin haut-gauche, comme sur la home */}
         <motion.div
@@ -111,23 +111,23 @@ export function ConditionsBlock({ t }: { t: Dictionary["anniversaires"] }) {
           </motion.div>
         </motion.div>
 
-        {/* Chaussettes — sticker flottant (mobile) */}
-        <motion.div
-          className="lg:hidden flex-shrink-0"
-          animate={{ y: [0, -8, 0], rotateZ: [0, 2, 0, -2, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/chaussettes-obligatoires.png"
-            alt={regles.chaussettesTitle}
-            style={{ height: 56, width: "auto", display: "block", filter: "drop-shadow(-2px 6px 10px rgba(0,0,0,0.18))" }}
-          />
-        </motion.div>
-        <div>
-          <p className="font-extrabold text-amber-900 mb-0.5" style={{ fontFamily: BALOO }}>{regles.chaussettesTitle}</p>
-          <p className="text-sm text-amber-800/60 leading-snug" style={{ fontFamily: NUNITO }}>{regles.chaussettes}</p>
+        {/* En-tête : sticker (mobile) + titre, description pleine largeur dessous */}
+        <div className="flex items-center gap-3 mb-2">
+          <motion.div
+            className="lg:hidden flex-shrink-0"
+            animate={{ y: [0, -8, 0], rotateZ: [0, 2, 0, -2, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/chaussettes-obligatoires.png"
+              alt={regles.chaussettesTitle}
+              style={{ height: 56, width: "auto", display: "block", filter: "drop-shadow(-2px 6px 10px rgba(0,0,0,0.18))" }}
+            />
+          </motion.div>
+          <p className="font-extrabold text-amber-900 leading-tight" style={{ fontFamily: BALOO }}>{regles.chaussettesTitle}</p>
         </div>
+        <p className="text-sm text-amber-800/60 leading-snug" style={{ fontFamily: NUNITO }}>{regles.chaussettes}</p>
       </motion.div>
 
       {/* Nourriture extérieure — même poids visuel que le bloc chaussettes */}
@@ -135,20 +135,21 @@ export function ConditionsBlock({ t }: { t: Dictionary["anniversaires"] }) {
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, delay: 0.05 }}
-        className="relative flex items-center gap-4 rounded-2xl bg-white border border-amber-100 shadow-md p-5"
+        className="relative rounded-2xl bg-white border border-amber-100 shadow-md p-5"
       >
-        <motion.div
-          className="flex-shrink-0"
-          animate={{ y: [0, -8, 0], rotateZ: [0, -2, 0, 2, 0] }}
-          transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <InterditSticker size={56} />
-        </motion.div>
-        <div>
-          <p className="font-extrabold text-amber-900 mb-0.5" style={{ fontFamily: BALOO }}>{regles.nourritureTitle}</p>
-          <p className="text-sm text-amber-800/60 leading-snug" style={{ fontFamily: NUNITO }}>{regles.nourriture}</p>
-          <p className="text-xs text-amber-800/40 leading-snug mt-1.5" style={{ fontFamily: NUNITO }}>{regles.nourritureExceptions}</p>
+        {/* En-tête : picto + titre, description pleine largeur dessous */}
+        <div className="flex items-center gap-3 mb-2">
+          <motion.div
+            className="flex-shrink-0"
+            animate={{ y: [0, -8, 0], rotateZ: [0, -2, 0, 2, 0] }}
+            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <InterditSticker size={56} />
+          </motion.div>
+          <p className="font-extrabold text-amber-900 leading-tight" style={{ fontFamily: BALOO }}>{regles.nourritureTitle}</p>
         </div>
+        <p className="text-sm text-amber-800/60 leading-snug" style={{ fontFamily: NUNITO }}>{regles.nourriture}</p>
+        <p className="text-xs text-amber-800/40 leading-snug mt-1.5" style={{ fontFamily: NUNITO }}>{regles.nourritureExceptions}</p>
       </motion.div>
 
       {/* Conditions */}

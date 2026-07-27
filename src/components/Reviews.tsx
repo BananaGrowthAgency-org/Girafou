@@ -76,7 +76,7 @@ export default function Reviews({
         </motion.div>
       </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-16 sm:py-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-14 pb-8 sm:py-20">
         {/* ── En-tête (animé) ── */}
         <motion.div
           ref={ref}

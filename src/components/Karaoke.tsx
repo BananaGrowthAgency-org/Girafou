@@ -61,7 +61,7 @@ export default function Karaoke({ t }: { t: Dictionary["pages"]["karaoke"] }) {
   return (
     <>
       {/* ── Hero ── (overflow-visible : les cartes stats débordent en bas) */}
-      <section className="relative overflow-visible" style={{ minHeight: "70vh" }}>
+      <section className="relative overflow-visible lg:min-h-[70vh]">
         {/* Fond photo + halos, découpés dans un calque à part */}
         <div className="absolute inset-0 overflow-hidden">
           <Image src="/images/karaoke/hero.jpg" alt="Box karaoké Just Karaoké" fill priority sizes="(max-width: 768px) 200vw, 100vw" className="object-cover" />
@@ -70,7 +70,7 @@ export default function Karaoke({ t }: { t: Dictionary["pages"]["karaoke"] }) {
           <div className="absolute -bottom-28 -right-24 w-96 h-96 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(236,72,153,0.4) 0%, transparent 70%)", filter: "blur(55px)" }} />
         </div>
 
-        <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-3xl mx-auto px-6" style={{ minHeight: "70vh", paddingTop: "5rem", paddingBottom: "8.5rem" }}>
+        <div className="relative z-10 flex flex-col items-center justify-start lg:justify-center text-center max-w-3xl mx-auto px-6 pt-12 pb-4 lg:pt-20 lg:pb-[8.5rem] lg:min-h-[70vh]">
           <motion.span
             animate={{ y: [0, -6, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -97,8 +97,11 @@ export default function Karaoke({ t }: { t: Dictionary["pages"]["karaoke"] }) {
           </a>
         </div>
 
-        {/* Cartes "stats" (les 4 atouts) — débordent sur la section suivante */}
-        <div className="absolute bottom-0 left-0 right-0 z-30 translate-y-1/2 px-6 lg:px-10 max-w-5xl mx-auto">
+        {/* Cartes "stats" (les 4 atouts). En desktop elles chevauchent la section
+            suivante (absolute + translate). En mobile (2×2, deux fois plus hautes)
+            ce chevauchement recouvrait le bouton et le titre suivant : on les
+            laisse donc dans le flux normal, sous le contenu du hero. */}
+        <div className="relative z-30 mt-6 px-6 max-w-5xl mx-auto lg:absolute lg:bottom-0 lg:left-0 lg:right-0 lg:mt-0 lg:translate-y-1/2 lg:px-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {t.features.map((f, i) => (
               <Reveal key={i} delay={i * 0.1}>
@@ -117,7 +120,7 @@ export default function Karaoke({ t }: { t: Dictionary["pages"]["karaoke"] }) {
       </section>
 
       {/* ── Concept (fond sombre néon) — titre + accroche sous les cartes ── */}
-      <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-24 overflow-hidden" style={{ background: DARK }}>
+      <section className="relative pt-9 lg:pt-40 pb-10 sm:pb-24 overflow-hidden" style={{ background: DARK }}>
         <div className="absolute top-0 left-1/4 w-80 h-80 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(124,58,237,0.35) 0%, transparent 70%)", filter: "blur(60px)" }} />
         <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(236,72,153,0.3) 0%, transparent 70%)", filter: "blur(60px)" }} />
 
@@ -132,7 +135,7 @@ export default function Karaoke({ t }: { t: Dictionary["pages"]["karaoke"] }) {
       <Wave above={DARK} fill={LIGHT} />
 
       {/* ── Formules ── */}
-      <section className="pt-14 pb-20 sm:pb-24" style={{ background: LIGHT }}>
+      <section className="pt-10 pb-12 sm:pb-24" style={{ background: LIGHT }}>
         <div className="max-w-6xl mx-auto px-6">
           <Reveal className="text-center mb-12">
             <h2 className="text-4xl sm:text-5xl font-extrabold mb-3" style={{ fontFamily: BALOO, color: "#6D28D9" }}>{t.formulesTitle}</h2>
@@ -168,7 +171,7 @@ export default function Karaoke({ t }: { t: Dictionary["pages"]["karaoke"] }) {
       <Wave above={LIGHT} fill="#2A1052" />
 
       {/* ── Anniversaire ── */}
-      <section className="relative py-16 sm:py-20 overflow-hidden" style={{ background: "linear-gradient(to bottom, #2A1052 0%, #4A1454 55%, #7A1E5A 100%)" }}>
+      <section className="relative py-12 sm:py-20 overflow-hidden" style={{ background: "linear-gradient(to bottom, #2A1052 0%, #4A1454 55%, #7A1E5A 100%)" }}>
         <div className="absolute -top-20 right-10 w-80 h-80 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(236,72,153,0.35) 0%, transparent 70%)", filter: "blur(60px)" }} />
 
         <div className="relative max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
@@ -210,7 +213,7 @@ export default function Karaoke({ t }: { t: Dictionary["pages"]["karaoke"] }) {
       <Wave above="#7A1E5A" fill={LIGHT} />
 
       {/* ── Infos pratiques (comme la home : repères + horaires + adresse/carte) ── */}
-      <section className="pt-10 pb-20 sm:pb-24" style={{ background: LIGHT }}>
+      <section className="pt-10 pb-12 sm:pb-24" style={{ background: LIGHT }}>
         <div className="max-w-6xl mx-auto px-6">
           <Reveal className="text-center mb-12">
             <h2 className="text-4xl sm:text-5xl font-extrabold" style={{ fontFamily: BALOO, color: "#6D28D9" }}>{t.infosTitle}</h2>
@@ -294,8 +297,8 @@ export default function Karaoke({ t }: { t: Dictionary["pages"]["karaoke"] }) {
       <Wave above={LIGHT} fill={DARK} />
 
       {/* ── CTA final (fond sombre néon) ── */}
-      <section className="relative py-16 sm:py-20 overflow-hidden text-center" style={{ background: DARK }}>
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle at 50% 120%, rgba(236,72,153,0.35) 0%, transparent 60%)" }} />
+      <section className="relative py-12 sm:py-20 overflow-hidden text-center" style={{ background: DARK }}>
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle at 50% 50%, rgba(236,72,153,0.35) 0%, transparent 60%)" }} />
         <Reveal className="relative max-w-2xl mx-auto px-6">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-3" style={{ fontFamily: BALOO }}>{t.ctaTitle}</h2>
           <p className="text-white/70 mb-7 text-lg" style={{ fontFamily: NUNITO }}>{t.ctaText}</p>
