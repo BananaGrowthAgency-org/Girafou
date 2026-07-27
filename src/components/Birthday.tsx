@@ -141,7 +141,7 @@ export default function Birthday({
   const starsOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   return (
-    <section ref={sectionRef} id="anniversaires" className="relative py-16 sm:py-24 overflow-hidden">
+    <section ref={sectionRef} id="anniversaires" className="relative pt-16 pb-8 sm:py-24 overflow-hidden">
       {/* White base */}
       <div className="absolute inset-0" style={{ background: "#ffffff" }} />
       {/* Subtle amber radial glow top-right */}

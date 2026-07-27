@@ -15,7 +15,7 @@ export default function Fidelite({ t }: { t: Dictionary["home"]["fidelite"] }) {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="relative py-16 sm:py-24 overflow-hidden" style={{ background: "#ffffff" }}>
+    <section className="relative py-10 sm:py-20 overflow-hidden" style={{ background: "#ffffff" }}>
       {/* Halo doré discret */}
       <div
         className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full pointer-events-none"
@@ -28,22 +28,23 @@ export default function Fidelite({ t }: { t: Dictionary["home"]["fidelite"] }) {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center rounded-[2rem] overflow-hidden shadow-xl border border-amber-100"
+          className="grid lg:grid-cols-2 gap-5 lg:gap-10 items-center rounded-[2rem] overflow-hidden shadow-xl border border-amber-100"
           style={{ background: "linear-gradient(135deg, #FFF7E6 0%, #FFEFC4 100%)" }}
         >
-          {/* Photo — le mur peint Girafou */}
-          <div className="relative h-64 sm:h-80 lg:h-full lg:min-h-[420px]">
+          {/* Photo — le mur peint Girafou (cadré sur le nom du parc) */}
+          <div className="relative h-36 sm:h-52 lg:h-full lg:min-h-[420px]">
             <Image
               src="/images/fidelite/carte.jpg"
               alt="Le mur peint du parc Girafou"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
+              style={{ objectPosition: "center 46%" }}
             />
           </div>
 
           {/* Contenu */}
-          <div className="px-7 sm:px-10 py-8 sm:py-10">
+          <div className="px-7 sm:px-10 pt-6 pb-7 sm:py-10">
             <motion.span
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -57,13 +58,13 @@ export default function Fidelite({ t }: { t: Dictionary["home"]["fidelite"] }) {
               {t.title}
             </h2>
 
-            {/* Équation 1 € = 1 point */}
-            <div className="mt-6 flex items-center gap-3 flex-wrap">
-              <span className="px-4 py-2.5 rounded-2xl bg-white shadow-md font-extrabold text-amber-900 text-base sm:text-lg" style={{ fontFamily: BALOO }}>
+            {/* Équation 1 € = 1 point — sur une seule ligne */}
+            <div className="mt-5 flex items-center gap-2 whitespace-nowrap">
+              <span className="px-3.5 py-2 rounded-xl bg-white shadow-md font-extrabold text-amber-900 text-sm sm:text-lg" style={{ fontFamily: BALOO }}>
                 {t.spend}
               </span>
-              <span className="text-2xl font-extrabold text-amber-500" style={{ fontFamily: BALOO }}>=</span>
-              <span className="px-4 py-2.5 rounded-2xl text-white shadow-md font-extrabold text-base sm:text-lg" style={{ background: "linear-gradient(135deg, #F5A623, #FF5722)", fontFamily: BALOO }}>
+              <span className="text-xl sm:text-2xl font-extrabold text-amber-500" style={{ fontFamily: BALOO }}>=</span>
+              <span className="px-3.5 py-2 rounded-xl text-white shadow-md font-extrabold text-sm sm:text-lg" style={{ background: "linear-gradient(135deg, #F5A623, #FF5722)", fontFamily: BALOO }}>
                 {t.point}
               </span>
             </div>

@@ -7,7 +7,7 @@ import Link from "next/link";
 import { type Formule } from "@/lib/anniversaires";
 import { OptionPizzaBanner, ConditionsBlock } from "./AnniversairesShared";
 
-import { GRADIENT_TEXT_NO_OUTLINE, TEXT_OUTLINE, TEXT_OUTLINE_SOFT } from "@/lib/text";
+import { GRADIENT_TEXT_NO_OUTLINE, TEXT_OUTLINE, TEXT_OUTLINE_SOFT, fixOrphans } from "@/lib/text";
 import { useLocale, useLocalePath } from "@/lib/i18n/useLocale";
 import { ui } from "@/lib/i18n/ui";
 import type { Dictionary, FormuleTexte } from "@/lib/i18n/dictionaries";
@@ -201,17 +201,21 @@ export default function FormuleDetail({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="mt-5 inline-flex items-baseline gap-2 rounded-2xl bg-white/12 backdrop-blur-sm border border-white/25 px-5 py-2.5"
+        className="mt-5 inline-flex flex-col sm:flex-row items-center sm:items-baseline justify-center gap-x-2 gap-y-1 rounded-2xl bg-white/12 backdrop-blur-sm border border-white/25 px-5 py-2.5"
         style={{ fontFamily: NUNITO }}
       >
         <span className="text-white font-extrabold text-lg sm:text-xl" style={{ fontFamily: BALOO }}>
           {name}
         </span>
-        <span className="text-white/70">·</span>
-        <span className="text-white font-extrabold text-lg sm:text-xl" style={{ fontFamily: BALOO }}>
-          {texte.price}
+        <span className="hidden sm:inline text-white/70">·</span>
+        {/* Prix + « par enfant » groupés : en mobile ils passent sous le nom,
+            en desktop ils restent sur la même ligne que le nom. */}
+        <span className="inline-flex items-baseline gap-2 whitespace-nowrap">
+          <span className="text-white font-extrabold text-lg sm:text-xl" style={{ fontFamily: BALOO }}>
+            {fixOrphans(texte.price)}
+          </span>
+          <span className="text-white/75 text-sm font-semibold">{t.perChild}</span>
         </span>
-        <span className="text-white/75 text-sm font-semibold">{t.perChild}</span>
       </motion.p>
     </div>
   );

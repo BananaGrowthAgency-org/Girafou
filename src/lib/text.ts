@@ -25,3 +25,13 @@ export const TEXT_OUTLINE_THIN_SOFT =
 // donc. Pas de contour tracé ici : un WebkitTextStroke se peint par-dessus le
 // remplissage et abîme le dégradé — ces mots restent lisibles sans.
 export const GRADIENT_TEXT_NO_OUTLINE = { textShadow: "none" } as const;
+
+// Typographie française : on colle un espace insécable avant la ponctuation
+// haute (! ? : ;), avant l'euro et à l'intérieur des guillemets, pour éviter
+// qu'un « ! » ou « € » orphelin ne tombe seul sur une nouvelle ligne (surtout
+// en vue mobile où les lignes sont courtes).
+export function fixOrphans(str: string): string {
+  return str
+    .replace(/ ([!?:;»%€])/g, " $1")
+    .replace(/« /g, "« ");
+}

@@ -139,11 +139,11 @@ export default function PlanAcces({ t }: { t: Dictionary["pages"]["planAcces"] }
                   <a href="tel:0231537268" className="text-sm sm:text-[15px] font-bold text-amber-900/85 hover:text-orange-500 transition-colors">02 31 53 72 68</a>
                 </li>
               </ul>
-              <div className="mt-5 flex flex-wrap gap-2.5">
-                <a href={MAPS_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-white text-sm font-extrabold shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer" style={{ background: RED, fontFamily: NUNITO }}>
+              <div className="mt-5 flex gap-2.5">
+                <a href={MAPS_LINK} target="_blank" rel="noopener noreferrer" className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-white text-sm font-extrabold shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer" style={{ background: RED, fontFamily: NUNITO }}>
                   <IconExternal className="w-4 h-4" /> {t.route}
                 </a>
-                <a href="tel:0231537268" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-extrabold border-2 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer" style={{ borderColor: RED, color: RED, fontFamily: NUNITO }}>
+                <a href="tel:0231537268" className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-extrabold border-2 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer" style={{ borderColor: RED, color: RED, fontFamily: NUNITO }}>
                   <IconPhone className="w-4 h-4" /> {t.call}
                 </a>
               </div>
