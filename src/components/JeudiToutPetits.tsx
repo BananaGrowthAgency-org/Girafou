@@ -77,7 +77,7 @@ export default function JeudiToutPetits({ t }: { t: Dictionary["home"]["toddler"
                   {/* Lisibilité gagnée par la graisse (bold), pas par la taille :
                       la tuile garde ses dimensions et « Parents, mamies,
                       nounous… » tient sur une seule ligne. */}
-                  <p className="text-white font-bold text-sm leading-tight" style={{ fontFamily: NUNITO, textShadow: TEXT_OUTLINE_THIN_SOFT }}>
+                  <p className="text-white font-bold text-sm leading-tight whitespace-pre-line" style={{ fontFamily: NUNITO, textShadow: TEXT_OUTLINE_THIN_SOFT }}>
                     {p.sub}
                   </p>
                 </div>

@@ -17,9 +17,12 @@ const NUNITO = "var(--font-nunito)";
 const BROWN = "#5A3520";
 const RED = "#C0392B";
 
-// Clé publique Web3Forms (sûre côté client). À définir dans .env.local :
-// NEXT_PUBLIC_WEB3FORMS_KEY=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
+// Clé publique Web3Forms (destinée au client : elle figure dans le <form>, elle
+// n'est pas secrète). Surchargeable via NEXT_PUBLIC_WEB3FORMS_KEY (ex. Vercel) ;
+// à défaut, on utilise la clé du compte Girafou pour que le formulaire marche
+// partout sans configuration.
+const ACCESS_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "2ab3e28e-a43b-4716-a05a-51549fa6eb88";
 
 
 const inputCls =
@@ -56,15 +59,6 @@ const IconCheck = (p: { className?: string }) => (
     <path d="M20 6 9 17l-5-5" />
   </svg>
 );
-
-function InfoRow({ icon, children }: { icon: ReactNode; children: ReactNode }) {
-  return (
-    <li className="flex items-start gap-3">
-      <span className="flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "#FFF3D0", color: RED }}>{icon}</span>
-      <span className="text-sm text-amber-900/85 leading-snug font-semibold pt-1.5" style={{ fontFamily: NUNITO }}>{children}</span>
-    </li>
-  );
-}
 
 type Status = "idle" | "loading" | "success" | "error";
 
