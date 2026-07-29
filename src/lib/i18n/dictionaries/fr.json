@@ -38,7 +38,7 @@
       "points": [
         {
           "label": "10h00 – 12h30",
-          "sub": "Tous les jeudis matin"
+          "sub": "Tous les jeudis matin,\nhors vacances scolaires"
         },
         {
           "label": "5 € par enfant",
@@ -142,7 +142,7 @@
       "tips": [
         {
           "label": "Chaussettes obligatoires",
-          "sub": "Enfants et adultes — 2,50 € la paire sur place"
+          "sub": "Pour les enfants comme pour les adultes"
         },
         {
           "label": "Pas de nourriture extérieure",
