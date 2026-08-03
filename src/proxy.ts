@@ -57,6 +57,56 @@ function redirectTo(request: NextRequest, pathname: string): NextResponse {
   return NextResponse.redirect(url);
 }
 
+// ── Redirections des anciennes URL (ancien site WordPress) vers le nouveau ──
+// Migration SEO : on renvoie en 308 (permanent — Google le traite comme un 301)
+// les chemins de l'ancien girafou.com dont l'URL a changé. Les pages dont le
+// chemin est identique (/anniversaires, /nos-offres, /restauration…) n'ont pas
+// besoin d'entrée : Next retire déjà le slash final. Les cibles sont les chemins
+// PUBLICS FR (servis à la racine), ensuite pris en charge par le routage i18n.
+const LEGACY_REDIRECTS: Record<string, string> = {
+  // Activités (anciens slugs à la racine → /activites/<nouveau slug>)
+  "/helicoptere": "/activites/helicoptere",
+  "/trampolines": "/activites/trampolines",
+  "/jeux-gonflables": "/activites/gonflables",
+  "/karting-et-motos": "/activites/karting",
+  "/luge-et-toboggans": "/activites/toboggan",
+  "/labyrinthe": "/activites/labyrinthes",
+  "/neoxperience": "/activites/neoxperience",
+  "/piscine-a-balle": "/activites/piscine-balles",
+  "/saut": "/activites/zones-saut",
+  // Formules d'anniversaire (anciennes pages à la racine → /anniversaires/…)
+  "/formule-du-lion": "/anniversaires/formule-du-lion",
+  "/formule-ptits-gourmands": "/anniversaires/ptits-gourmands",
+  "/formule-gira-fun-karaoke": "/anniversaires/gira-fun-karaoke",
+  "/formule-v-i-p": "/anniversaires", // formule supprimée → hub anniversaires
+  // Divers
+  "/f-a-q": "/faq",
+  "/layouts/opening-hours": "/prix-des-entrees", // horaires
+  // Anciennes URL déjà en 404 mais conservées par sécurité (liens externes,
+  // signets, ancien menu de réservation…).
+  "/contacts": "/contactez-nous",
+  "/book-a-party": "/anniversaires",
+  "/booking-form": "/prix-des-entrees",
+  "/events": "/anniversaires",
+};
+
+/** 308 permanent vers le nouveau chemin si l'URL entrante est une ancienne URL. */
+function legacyRedirect(request: NextRequest, pathname: string): NextResponse | null {
+  // On normalise le slash final : /saut/ est traité comme /saut.
+  const clean =
+    pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+  const target =
+    LEGACY_REDIRECTS[clean] ??
+    // Fragments de gabarit du thème WordPress (/layouts/header-…, /layouts/footer-…)
+    // → accueil, pour ne laisser aucun 404 hérité.
+    (clean === "/layouts" || clean.startsWith("/layouts/") ? "/" : undefined);
+  if (!target) return null;
+  const url = request.nextUrl.clone();
+  url.pathname = target;
+  url.search = ""; // on ne propage pas les paramètres de l'ancien site
+  return NextResponse.redirect(url, 308);
+}
+
 /** Sert le chemin interne `/<locale><internal>` sans changer l'URL affichée. */
 function rewriteTo(request: NextRequest, locale: Locale, internal: string): NextResponse {
   const url = request.nextUrl.clone();
@@ -69,6 +119,11 @@ export async function proxy(request: NextRequest): Promise<NextResponse> {
 
   // /admin n'est jamais traduit : il vit hors de l'arborescence [lang].
   if (isAdmin(pathname)) return guardAdmin(request);
+
+  // Anciennes URL de girafou.com (WordPress) → nouveau site, avant tout le
+  // routage de langue, pour préserver le référencement à la migration.
+  const legacy = legacyRedirect(request, pathname);
+  if (legacy) return legacy;
 
   const segment = pathname.split("/")[1] ?? "";
 
