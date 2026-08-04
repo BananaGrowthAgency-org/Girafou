@@ -23,7 +23,10 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   return {
     metadataBase: new URL(SITE_URL),
     // Valeurs de repli : chaque page fournit ses propres title/description
-    // (og:title / og:description en héritent alors). Image OG : app/opengraph-image.jpg.
+    // (og:title / og:description en héritent alors). L'image OG est référencée
+    // explicitement : le fichier vit dans app/ (hors du segment [lang]), donc la
+    // détection automatique de Next ne s'y rattache pas — on la déclare ici pour
+    // que toutes les pages (qui héritent de ce openGraph) émettent bien og:image.
     title: dict.site.title,
     description: dict.site.description,
     keywords: dict.site.keywords,
@@ -31,9 +34,11 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
       siteName: "Girafou",
       locale: OG_LOCALE[lang],
       type: "website",
+      images: [{ url: "/opengraph-image.jpg", width: 1200, height: 524, alt: dict.site.title }],
     },
     twitter: {
       card: "summary_large_image",
+      images: ["/twitter-image.jpg"],
     },
   };
 }
