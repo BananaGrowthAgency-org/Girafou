@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { fontVariables } from "@/lib/fonts";
 import { LOCALES, hasLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import "../globals.css";
+
+const GTM_ID = "GTM-TG7BSX8F";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://girafou.com";
 
@@ -49,7 +52,26 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
 
   return (
     <html lang={lang} className="h-full">
-      <body className={`${fontVariables} min-h-full antialiased`}>{children}</body>
+      <head>
+        <Script id="gtm-script" strategy="beforeInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');`}
+        </Script>
+      </head>
+      <body className={`${fontVariables} min-h-full antialiased`}>
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }
