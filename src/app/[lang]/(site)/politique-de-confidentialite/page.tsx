@@ -25,7 +25,11 @@ const sections: LegalSection[] = [
   },
   {
     heading: "Cookies",
-    paragraphs: ["Afin de renforcer la sécurité de votre navigation, ce site n'utilise aucun cookie."],
+    paragraphs: [
+      "Les utilisateurs sont informés que lors de leurs visites sur ce site, des cookies (éléments ne permettant pas de les identifier mais servant à enregistrer des informations sur leur navigation) peuvent s'installer automatiquement sur leur logiciel de navigation. Sont alors recueillies de manière automatique des données non nominatives, le plus souvent à usage statistique, concernant la navigation sur le site de Girafou par son utilisateur.",
+      "Les utilisateurs sont informés de la présence de ces cookies, de la possibilité qui leur est offerte de les refuser et du fait que la désactivation des cookies peut techniquement limiter leur accès à tout ou partie du site. Il est par ailleurs possible de désactiver les cookies en paramétrant son navigateur.",
+      "Tout utilisateur du site https://girafou.com reconnaît avoir pris connaissance des mentions légales d'information ci-dessus exposées et les avoir acceptées.",
+    ],
   },
 ];
 
